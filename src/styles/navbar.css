@@ -1,0 +1,26 @@
+.navbar {
+	width: 920px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.navbar-list {
+	width: 900px;
+	padding: 10px;
+	box-sizing: border-box;
+	display: block;
+
+    list-style-type: none;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+}
+
+.navbar-list li {
+	width: 120px;
+	display: inline-block;
+	background-color: pink;
+	margin: 0 10px;
+}
