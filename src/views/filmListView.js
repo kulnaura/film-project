@@ -6,7 +6,7 @@ import {
   Link
 } from 'react-router-dom';
 import fetch from 'isomorphic-fetch';
-import * as filmActions from './../components/filmActions';
+import * as filmActions from './../actions/filmActions';
 
 import './../styles/film.css';
 
@@ -29,23 +29,28 @@ const FilmListElement = React.createClass({
 		let filmElement = this.props.value;
 		return (
 			<div className="film-element-container">
-				<p className="film-name">
-					<Link to={ (this.props.urlParams ? this.props.urlParams.url : "/film") + "?id=" + filmElement.id +
-							"&name=" + filmElement.name +
-							"&year=" + filmElement.year +
-							"&genres=" + JSON.stringify(filmElement.genres) }>{ filmElement.name }</Link>
-				</p>
-				<p className="film-year">{ filmElement.year }</p>
-				{ (filmElement.genres) 
-					? <ul className="film-genres-list">
-						{ filmElement.genres.map( (genre) => {
-							return 	<li key={"film" + filmElement.id + "_genre_" + genre.id}>
-										<p>{ genre.name }</p>
-									</li>
-						})}
-					</ul> 
-					: null
-				}
+				<div className="film-element-inner-container">
+					<p className="film-name">
+						<Link to={ (this.props.urlParams ? this.props.urlParams.url : "/film") + "?id=" + filmElement.id +
+								"&name=" + filmElement.name +
+								"&year=" + filmElement.year +
+								"&genres=" + JSON.stringify(filmElement.genres) }>{ filmElement.name }</Link>
+					</p>
+					<p className="film-year">{ filmElement.year }</p>
+					{ (filmElement.genres) 
+						? <div className="film-genres-container">
+							<p>Genres:</p>
+							<ul className="base-list film-genres-list">
+								{ filmElement.genres.map( (genre) => {
+									return 	<li key={"film" + filmElement.id + "_genre_" + genre.id}>
+												<p className="film-genre-link">{ genre.name }</p>
+											</li>
+								})}
+							</ul> 
+						</div>
+						: null
+					}
+				</div>
 			</div>
 		)
 	}
@@ -54,7 +59,6 @@ const FilmListElement = React.createClass({
 
 class FilmListView extends Component {
 	constructor(props) {
-		console.log("Call constructor")
 	    super(props);
 	    this.state = {
 	    	list: null
@@ -62,7 +66,6 @@ class FilmListView extends Component {
   	}
 
   	componentDidMount() {
-  		console.log("Component mount")
   		filmActions.getFilmList()
   			.then(json => {
       			this.setState({
@@ -77,11 +80,10 @@ class FilmListView extends Component {
 				<div className="loading">loading ...</div>
 			)
 		}
-		console.log("list ", this)
 		return (
 			<div className="films-list-container">
 				<FilmListRender list={this.state.list} urlParams={this.props.urlParams} />
-				<div className="pagination-container">
+				<div className="page-pagination-container">
 					<div className="pag-left pag-element">Prev</div>
 					<div className="pag-right pag-element">Next</div>
 				</div>

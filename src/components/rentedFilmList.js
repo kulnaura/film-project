@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { Handlers } from './handlers';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom';
 import fetch from 'isomorphic-fetch';
-import * as filmActions from './filmActions';
+import * as filmActions from './../actions/filmActions';
 import RentedFilmListView from './../views/rentedFilmListView';
 
 import './../styles/film.css';

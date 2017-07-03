@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Handlers from './handlers';
-// import * as sessionActions from '../sessionActions';
-const CONST_EXP = 72*3600*1000;
+import { login } from './../actions/authActions';
+import './../styles/login.css';
 
 class Auth extends Component {
 	constructor(props) {
@@ -9,88 +9,47 @@ class Auth extends Component {
 	    this.onSubmit = this.onSubmit.bind(this);
   	}
 
-  	// handleErrors(response) {
-  	// 	if (!response.status) {
-  	// 		if (response.message) {
-  	// 			throw Warning(response.message);
-  	// 		} else {
-  	// 			throw Error(response.error);
-  	// 		}
-  	// 	}
-  	// 	return response;
-  	// }
-
-	onSubmit(e, p) {
+	onSubmit(e) {
     	e.preventDefault();
-		console.log("click");
-		console.log(e);
-		console.log(p);
 
-	// get data from refs
-	    const formData = {};
+        const formData = {};
 	    for (const field in this.refs) {
 	      formData[field] = this.refs[field].value;
 	    }
 
-	    console.log('-->', formData);
-		let data = {
-			method: 'POST',
-			  credentials: 'same-origin',
-			  // mode: 'same-origin',
-			body: JSON.stringify(formData),
-			  headers: {
-			    'Accept':       'application/json',
-			    'Content-Type': 'application/json'
-			  }
-		};
-
-		let user = formData.login;
-
-		console.log('data: =>', data);
-
-		return fetch(`http://localhost:8001/login`, data)
-      		.then(response => response.json())
-      		.then(response => Handlers.handleErrors(response))
-      		.then(json => {
-      			if (json.token) {
-      				console.log("we have token")
-      				console.log("and we need to save this token to some store")
-      				// save to store
-      				sessionStorage.setItem('jwt', json.token);
-      				// sessionStorage.setItem('exp', json.exp ? json.exp : )
-      				var t = new Date().getTime();
-      				console.log(t)
-      				sessionStorage.setItem('authTime', t)
-      				sessionStorage.setItem('user', user)
-      				console.log(sessionStorage)
-      				console.log(this)
-      				// default redirect after login
-					this.props.history.push('/');
-      				// so we can add function that update our session and call login func before we unlogged
-      			}
-  			})
-      		.catch( err => {
-      			console.log("catch: ",err)
-      			// throw Error(err);
-      		})
-      debugger;
+	    login(formData, this);
 	}
 
 	render() {
 		return (
-			<div>
-				<div>Login component</div>
-				<form onSubmit={this.onSubmit}>
-					<ul className="base-list">
-						<li>
-							<input className="form-input" ref="login" type="text" name="login" defaultValue="login01" />
-						</li>
-						<li>
-							<input className="form-input" ref="password" type="password" name="password" defaultValue="pass01" />
-						</li>
-					</ul>
-					<button className="form-submit-button" type="submit">Submit</button>
-				</form>
+			<div className="login-container">
+				<div className="page-header">
+					<div className="page-caption">
+						<p>Login page</p>
+					</div>
+				</div>
+				<div className="login-form-container">
+					<div className="form-caption">
+						<p>Login form</p>
+					</div>
+					<div className="login-form">
+						<form onSubmit={this.onSubmit}>
+							<ul className="base-list login-form-list">
+								<li>
+									<p className="element-caption">Login:</p>
+									<input className="form-input" ref="login" type="text" name="login" defaultValue="login01" placeholder="Enter your login" />
+								</li>
+								<li>
+									<p className="element-caption">Password:</p>
+									<input className="form-input" ref="password" type="password" name="password" defaultValue="pass01" placeholder="Enter your password" />
+								</li>
+								<li>
+									<button className="form-submit-button" type="submit">Login</button>
+								</li>
+							</ul>
+						</form>
+					</div>
+				</div>
 			</div>
 		)
 	}

@@ -1,10 +1,8 @@
 import * as sessionActions from './sessionActions';
-import { Handlers } from './handlers';
+import { Handlers } from './../components/handlers';
 
 
-export function getFilmList() {
-	console.log("GET FILM LIST func")
-	// debugger;
+export function getFilmList(params) {
 	let data = {
 		method: 'GET',
 		credentials: 'same-origin',
@@ -22,26 +20,13 @@ export function getFilmList() {
 
 export function getRentedFilmList() {
 
-
-    // const formData = {
-    // 	"film_id": parseInt(id)
-    // };
-
 	let data = {
 		method: 'GET',
 		credentials: 'same-origin',
-		// body: JSON.stringify(formData),
-		  headers: {
-		    // 'Accept':       'application/json',
-		    // 'Content-Type': 'application/json',
+		headers: {
 		    'Authorization': 'Bearer ' + sessionActions.getToken(),
-		  }
+		}
 	};
-
-	// let data = {
-	// 	method: 'GET',
-	// 	credentials: 'same-origin',
-	// };
 
 	return fetch(`http://localhost:8001/api/v1/rented-film`, data)
   		.catch( err => {
@@ -70,15 +55,12 @@ export function rentFilm(id) {
 		  }
 	};
 
-	console.log('data: =>', data);
-
 	return fetch(`http://localhost:8001/api/v1/film/rent`, data)
   		.catch( err => {
   			throw Error(err);
   		})
   		.then(response => Handlers.handleErrors(response.json()))
   		.then(json => {
-  			console.log("AFTER ADDING ->", json)
   			if (json.success) {	
   				return true;
   			}
@@ -101,15 +83,12 @@ export function unrentFilm(id) {
 		  }
 	};
 
-	console.log('data: =>', data);
-
 	return fetch(`http://localhost:8001/api/v1/film/finish`, data)
   		.catch( err => {
   			throw Error(err);
   		})
   		.then(response => Handlers.handleErrors(response.json()))
   		.then(json => {
-  			console.log("AFTER ADDING ->", json)
   			if (json.success) {	
   				return true;
   			}

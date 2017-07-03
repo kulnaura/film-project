@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 export class Handlers extends Component {
 	static handleErrors(response) {
-      			console.log("response", response)
   		if (!response.status) {
   			if (response.error) {
   				throw Error(response.error);
@@ -13,7 +12,7 @@ export class Handlers extends Component {
   			}
   		}
   		return response;
-  	}
+  }
 }
 
 export default Handlers;

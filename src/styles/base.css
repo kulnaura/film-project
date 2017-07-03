@@ -9,10 +9,19 @@ html, body,
     width: 960px;
     margin: 0 auto;
     background-color: #f3f3f3;
+    display: inline-table;
 }
 
 .routes-container {
 	padding: 20px;
+}
+
+/* Form */
+
+.form-caption {
+	font-size: 18px;
+	margin: 10px 0px;
+	display: inline-block;
 }
 
 .form-input {
@@ -22,15 +31,17 @@ html, body,
 	padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 14px;
 }
 
 .form-submit-button {
-
 	font-size: 16px;
 	padding: 8px;
     border: 1px solid #999;
     border-radius: 4px;
 }
+
+/* Base */
 
 .base-list {
 	margin: 0;
@@ -40,4 +51,34 @@ html, body,
     -webkit-margin-start: 0px;
     -webkit-margin-end: 0px;
     -webkit-padding-start: 0;
+}
+
+.element-caption {
+	font-size: 16px;
+	text-align: left;
+}
+
+.element-advice {
+	font-size: 12px;
+	text-align: left;
+}
+
+/* Page */
+
+.page-header {
+	margin-bottom: 20px;
+}
+
+.page-caption {
+	font-size: 20px;
+}
+
+.page-pagination-container {
+	width: 40px;
+	height: 40px;
+	vertical-align: middle;
+	display: inline-block;
+	margin: 0 10px;
+
+	display: none;
 }

@@ -5,14 +5,13 @@ import {
   Link
 } from 'react-router-dom';
 
-import AuthRequire from './components/authActions';
-import './styles/base.css';
+import { AuthRequire } from './actions/authActions';
 
 // import all components
 
 import Main from './main';
 import Login from './components/login';
-import Registration from './components/registration/registration';
+import Registration from './components/registration';
 import FilmList from './components/filmList';
 import RentedFilmList from './components/rentedFilmList';
 import FilmDetails from './components/filmDetails';
@@ -32,11 +31,10 @@ class Routes extends Component {
 			<Route path="/film" component={FilmDetails} />
 			<Route path="/rented-film" component={AuthRequire(RentedFilmDetails)} />
 			<Route path="/logout" component={AuthRequire(LogOut)} />
-			<Route path="/addfilm" component={AuthRequire(AddFilm)} />
+			<Route path="/add-film" component={AuthRequire(AddFilm)} />
 		</div>
     );
   }
 }
-
 
 export default Routes;

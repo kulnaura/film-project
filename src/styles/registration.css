@@ -1,0 +1,25 @@
+.register-container p {
+	margin: 0;
+}
+
+.register-form-container {
+	width: 240px;
+	margin: 0 auto;
+	background-color: lightgrey;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #b3b3b3;
+}
+
+.register-form {
+	width: 200px;
+	margin: 0 auto;
+}
+
+.register-form-list li {
+	margin-bottom: 20px;
+}
+
+.register-form-list li .form-input {
+	width: 170px;
+}

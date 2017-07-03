@@ -9,16 +9,21 @@
 	box-sizing: border-box;
 }
 
+.films-list-container p {
+	margin: 0;
+}
+
 .film-list {
     display: table;
 }
 
 .film-list-element {
 	width: 300px;
-	height: 400px;
+	height: 300px;
 	padding: 20px 10px;
 	display: inline-block;
 	box-sizing: border-box;
+	float: left;
 }
 
 .film-element-container {
@@ -27,38 +32,56 @@
 	width: 100%;
 	height: 100%;
 	box-sizing: border-box;
-	background-color: green;
+	background-color: #b3b3b3;
+	border: 2px solid;
+	border-color: white;
 }
 
-.film-name {
+.film-element-inner-container {
+    height: 100%;
+    width: 100%;
+    float: left;
+	position: relative;
+}
+
+p.film-name {
 	font-size: 32px;
+	margin: 15px 0;
 }
 
-.film-name a, .film-name a:visited {
+.film-name a, .film-name a:visited,
+.film-genre-link a, .film-genre-link a:visited {
 	color: black;
-	text-decoration:none;
+	text-decoration: none;
 	outline: 0;
 }
 
-.film-year {
+p.film-year {
+	margin: 5px 0 10px;
+}
 
+.film-genres-container {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.film-genres-container>p {
+	text-align: left;
+	margin-bottom: 3px;
 }
 
 .film-genres-list {
+	margin-left: 10px;
 }
 
-/*** pagination ***/
-
-.pag-element {
-	width: 40px;
-	height: 40px;
-	background-color: blue;
-	color: white;
-	vertical-align: middle;
+.film-genres-list>li {
 	display: inline-block;
-	margin: 0 10px;
+	margin: 0 3px;
 }
 
-.pag-left {
+.film-genres-list>li>p {
 
 }
+
+

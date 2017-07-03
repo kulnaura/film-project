@@ -1,23 +1,8 @@
 import React, { Component } from 'react';
 import { Handlers } from './handlers';
 import fetch from 'isomorphic-fetch';
-import * as sessionActions from './sessionActions';
+import * as sessionActions from './../actions/sessionActions';
 import './../styles/addFilm.css';
-
-// const ResultMessage = React.createClass({
-// 	render() {
-// 		return (
-// 				{(this.props.status != "") 
-// 					? <div className="result">
-// 						<div className="result-container">
-// 							<p>{this.props.status}</p>
-// 						</div>
-// 					</div>
-// 					: null
-// 				}
-// 		)
-// 	}
-// });
 
 class AddFilm extends Component {
 	constructor(props) {
@@ -27,12 +12,6 @@ class AddFilm extends Component {
 	    	status: false,
 	    	statusMessage: "",
 	    }
-  	}
-
-  	componentDidMount() {
-  		if (this.state.status) {
-  			// ?
-  		}
   	}
 
   	setStatus(message) {
@@ -51,9 +30,6 @@ class AddFilm extends Component {
 
 	onSubmit(e) {
     	e.preventDefault();
-		console.log("click");
-		console.log(e);
-		console.log(this)
 
 	    const formData = {};
 	    for (const field in this.refs) {
@@ -76,14 +52,9 @@ class AddFilm extends Component {
 	    }
 		formData.year = parseInt(formData.year);
 
-	    console.log('-->', formData);
 	    let genres = formData.genres;
-	    console.log("Genres ->", genres);
 	    genres = genres.replace(/[\s\.\;\,]+/g, ",");
-	    console.log(genres)
 	    genres = genres.split(",");
-	    console.log(genres)
-
 
 	    function uniqIntArray(array) {
 			var result = [];
@@ -95,26 +66,20 @@ class AddFilm extends Component {
 			return result;
 	    }
 
-
 	    genres = uniqIntArray(genres);
-	    console.log("genres result ->", genres)
-
 	    formData.genres = genres;
-
-	    console.log(JSON.stringify(formData))
 	    	
 		let data = {
 			method: 'POST',
 			credentials: 'same-origin',
 			body: JSON.stringify(formData),
-			  headers: {
+			headers: {
 			    'Accept':       'application/json',
 			    'Content-Type': 'application/json',
 			    'Authorization': 'Bearer ' + sessionActions.getToken(),
-			  }
+			}
 		};
 
-		console.log('data: =>', data);
 
 		return fetch(`http://localhost:8001/api/v1/film`, data)
       		.catch( err => {
@@ -122,7 +87,6 @@ class AddFilm extends Component {
       		})
       		.then(response => Handlers.handleErrors(response.json()))
       		.then(json => {
-      			console.log("AFTER ADDING ->", json)
       			if (json.success) {	
 				    for (const field in this.refs) {
 				      this.refs[field].value = "";
@@ -136,25 +100,30 @@ class AddFilm extends Component {
 	render() {
 		return (
 			<div className="add-film-container">
+				<div className="page-header">
+					<div className="page-caption">
+						<p>Add film page</p>
+					</div>
+				</div>
 				<div className="add-film-form-container">
 					<div className="form-caption">
-						<p>Add film form</p>
+						<p>Add new film</p>
 					</div>
 					<div className="add-film-form">
 						<form onSubmit={this.onSubmit}>
 							<ul className="base-list add-film-form-list">
 								<li>
 									<p className="element-caption">Film name:</p>
-									<input className="form-input" ref="name" type="text" name="name" id="name"/>
+									<input className="form-input" ref="name" type="text" name="name" id="name" placeholder="Enter film name" />
 								</li>
 								<li>
 									<p className="element-caption">Film year:</p>
-									<input className="form-input" ref="year" type="number" name="year" id="year" />
+									<input className="form-input" ref="year" type="number" name="year" id="year" placeholder="Enter film year" />
 								</li>
 								<li>
 									<p className="element-caption">Film genres ids:</p>
-									<p className="element-advice">(Genders contains numbers from 1 to 3, like: 1, 3)</p>
-									<input className="form-input" ref="genres" type="text" name="genres" id="genres" pattern="[0-9\s\\,\\.\\;]+" />
+									<p className="element-advice">(Genders contains numbers from 1 to 3, like: 1, 2)</p>
+									<input className="form-input" ref="genres" type="text" name="genres" id="genres" pattern="[0-9\s\\,\\.\\;]+"  placeholder="Enter film genres ids" />
 								</li>
 								<li>
 									<button className="form-submit-button" type="submit">Add film</button>

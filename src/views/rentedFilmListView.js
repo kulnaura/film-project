@@ -6,14 +6,14 @@ import {
   Link
 } from 'react-router-dom';
 import fetch from 'isomorphic-fetch';
-import * as filmActions from './../components/filmActions';
+import * as filmActions from './../actions/filmActions';
 
 import './../styles/film.css';
 
 const FilmListRender = React.createClass({
   		render() {
   			return (
-				<ul className="film-list">
+				<ul className="base-list film-list">
 					{this.props.list.map( (film) => {
 						return 	<li className="film-list-element" key={ "film_" + film.id }>
 									<FilmListElement value={ film } />
@@ -29,23 +29,28 @@ const FilmListElement = React.createClass({
 		let filmElement = this.props.value;
 		return (
 			<div className="film-element-container">
-				<p className="film-name">
-					<Link to={ "/rented-film?id=" + filmElement.id +
-							"&name=" + filmElement.name +
-							"&year=" + filmElement.year +
-							"&genres=" + JSON.stringify(filmElement.genres) }>{ filmElement.name }</Link>
-				</p>
-				<p className="film-year">{ filmElement.year }</p>
-				{ (filmElement.genres) 
-					? <ul className="film-genres-list">
-						{ filmElement.genres.map( (genre) => {
-							return 	<li key={"film" + filmElement.id + "_genre_" + genre.id}>
-										<p>{ genre.name }</p>
-									</li>
-						})}
-					</ul> 
-					: null
-				}
+				<div className="film-element-inner-container">
+					<p className="film-name">
+						<Link to={ "/rented-film?id=" + filmElement.id +
+								"&name=" + filmElement.name +
+								"&year=" + filmElement.year +
+								"&genres=" + JSON.stringify(filmElement.genres) }>{ filmElement.name }</Link>
+					</p>
+					<p className="film-year">{ filmElement.year }</p>
+					{ (filmElement.genres) 
+						? <div className="film-genres-container">
+							<p>Genres:</p>
+							<ul className="base-list film-genres-list">
+								{ filmElement.genres.map( (genre) => {
+									return 	<li key={"film" + filmElement.id + "_genre_" + genre.id}>
+												<p className="film-genre-link">{ genre.name }</p>
+											</li>
+								})}
+							</ul> 
+						</div>
+						: null
+					}
+				</div>
 			</div>
 		)
 	}

@@ -35,6 +35,3 @@ class App extends Component {
 }
 
 export default App;
-
-          // <img src={logo} className="App-logo" alt="logo" />
-          // <h2>Welcome to React</h2>

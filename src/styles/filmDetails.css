@@ -1,0 +1,52 @@
+.film-details-header,
+.film-details-genre,
+.film-details-caption,
+.film-details-data {
+	margin: 0;
+	display: inline-block;
+}
+
+.film-details-container {
+
+}
+
+.film-details-genres-list {
+}
+
+.film-details {
+	width: 360px;
+	font-size: 16px;
+	margin: 10px auto;
+	background-color: lightgrey;
+	padding: 20px 80px;
+}
+
+.film-details-header-container {
+	display: inline-block;
+	margin-bottom: 30px;
+}
+
+.film-details-list {
+}
+
+.film-details-list-element {
+	margin-bottom: 20px;
+    text-align: left;
+}
+
+.film-details-caption {
+	width: 200px;
+}
+
+.film-details-data {
+
+}
+
+.film-details-genres-list {
+	display: inline-block;
+
+}
+.film-detail-genre-element {
+	display: inline-block;
+	margin-right: 10px;
+}
