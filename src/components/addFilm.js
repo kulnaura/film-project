@@ -121,7 +121,7 @@ class AddFilm extends Component {
                                 </li>
                                 <li>
                                     <p className="element-caption">Film genres ids:</p>
-                                    <p className="element-advice">(Genders contains numbers from 1 to 3, like: 1, 2)</p>
+                                    <p className="element-advice">(1 - Comedy, 2 - Horror, 3 - Drama. Example: 1, 2)</p>
                                     <input className="form-input" ref="genres" type="text" name="genres" id="genres" pattern="[0-9\s\\,\\.\\;]+"  placeholder="Enter film genres ids" />
                                 </li>
                                 <li>
