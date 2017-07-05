@@ -50,8 +50,8 @@ export function login(params, component) {
 
     let user = formData.login;
 
-    return fetch(process.env.API_URL, data)
-    // return fetch(`http://localhost:8001/login`, data)
+    // return fetch(process.env.API_URL, data)
+    return fetch(`https://film-api-go.herokuapp.com/login`, data)
         .then(response => response.json())
         .then(response => Handlers.handleErrors(response))
         .then(json => {

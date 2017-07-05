@@ -8,7 +8,7 @@ export function getFilmList(params) {
         credentials: 'same-origin',
     };
 
-    return fetch(`http://localhost:8001/api/v1/film`, data)
+    return fetch(`https://film-api-go.herokuapp.com/api/v1/film`, data)
         .catch( err => {
           throw Error(err);
         })
@@ -28,7 +28,7 @@ export function getRentedFilmList() {
         }
     };
 
-    return fetch(`http://localhost:8001/api/v1/rented-film`, data)
+    return fetch(`https://film-api-go.herokuapp.com/api/v1/rented-film`, data)
         .catch( err => {
           throw Error(err);
         })
@@ -55,7 +55,7 @@ export function rentFilm(id) {
         }
     };
 
-    return fetch(`http://localhost:8001/api/v1/film/rent`, data)
+    return fetch(`https://film-api-go.herokuapp.com/api/v1/film/rent`, data)
         .catch( err => {
             throw Error(err);
         })
@@ -83,7 +83,7 @@ export function unrentFilm(id) {
         }
     };
 
-    return fetch(`http://localhost:8001/api/v1/film/finish`, data)
+    return fetch(`https://film-api-go.herokuapp.com/api/v1/film/finish`, data)
         .catch( err => {
             throw Error(err);
         })

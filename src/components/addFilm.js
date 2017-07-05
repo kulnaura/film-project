@@ -81,7 +81,7 @@ class AddFilm extends Component {
         };
 
 
-        return fetch(`http://localhost:8001/api/v1/film`, data)
+        return fetch(`https://film-api-go.herokuapp.com/api/v1/film`, data)
             .catch( err => {
                 throw Error(err);
             })

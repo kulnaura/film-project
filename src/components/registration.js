@@ -30,7 +30,7 @@ class Registration extends Component {
             }
         };
 
-        return fetch(`http://localhost:8001/auth`, data)
+        return fetch(`https://film-api-go.herokuapp.com/auth`, data)
             .catch( err => {
                 throw Error(err);
             })
