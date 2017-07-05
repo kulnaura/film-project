@@ -57,7 +57,6 @@ const FilmListElement = React.createClass({
 
 class RentedFilmListView extends Component {
     constructor(props) {
-        console.log("Call constructor")
         super(props);
         this.state = {
             list: null,

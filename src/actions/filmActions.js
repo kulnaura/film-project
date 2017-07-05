@@ -34,7 +34,6 @@ export function getRentedFilmList() {
         })
         .then(response => Handlers.handleErrors(response.json()))
         .then(json => {
-          console.log("RETURN RENTED LIST ->", json)
           return json;
         })
 }
