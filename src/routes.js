@@ -20,21 +20,21 @@ import LogOut from './components/logout';
 import AddFilm from './components/addFilm';
 
 class Routes extends Component {
-  render() {
-    return (
-    	<div className="routes-container">
-			<Route exact path="/" component={Main} />
-			<Route path="/login" component={Login} />
-			<Route path="/registration" component={Registration} />
-			<Route path="/films" component={FilmList} />
-			<Route path="/rented-films" component={AuthRequire(RentedFilmList)} />
-			<Route path="/film" component={FilmDetails} />
-			<Route path="/rented-film" component={AuthRequire(RentedFilmDetails)} />
-			<Route path="/logout" component={AuthRequire(LogOut)} />
-			<Route path="/add-film" component={AuthRequire(AddFilm)} />
-		</div>
-    );
-  }
+    render() {
+        return (
+            <div className="routes-container">
+                <Route exact path="/" component={Main} />
+                <Route path="/login" component={Login} />
+                <Route path="/registration" component={Registration} />
+                <Route path="/films" component={FilmList} />
+                <Route path="/rented-films" component={AuthRequire(RentedFilmList)} />
+                <Route path="/film" component={FilmDetails} />
+                <Route path="/rented-film" component={AuthRequire(RentedFilmDetails)} />
+                <Route path="/logout" component={AuthRequire(LogOut)} />
+                <Route path="/add-film" component={AuthRequire(AddFilm)} />
+            </div>
+        );
+    }
 }
 
 export default Routes;

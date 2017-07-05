@@ -1,0 +1,87 @@
+.loading {
+
+}
+
+.films-list-container {
+    width: 100%;
+    background-color: lightgrey;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.films-list-container p {
+    margin: 0;
+}
+
+.film-list {
+    display: table;
+}
+
+.film-list-element {
+    width: 300px;
+    height: 300px;
+    padding: 20px 10px;
+    display: inline-block;
+    box-sizing: border-box;
+    float: left;
+}
+
+.film-element-container {
+    float: left;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background-color: #b3b3b3;
+    border: 2px solid;
+    border-color: white;
+}
+
+.film-element-inner-container {
+    height: 100%;
+    width: 100%;
+    float: left;
+    position: relative;
+}
+
+p.film-name {
+    font-size: 32px;
+    margin: 15px 0;
+}
+
+.film-name a, .film-name a:visited,
+.film-genre-link a, .film-genre-link a:visited {
+    color: black;
+    text-decoration: none;
+    outline: 0;
+}
+
+p.film-year {
+    margin: 5px 0 10px;
+}
+
+.film-genres-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.film-genres-container>p {
+    text-align: left;
+    margin-bottom: 3px;
+}
+
+.film-genres-list {
+    margin-left: 10px;
+}
+
+.film-genres-list>li {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.film-genres-list>li>p {
+
+}
+
+
