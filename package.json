@@ -28,6 +28,7 @@
     "start-dev": "react-scripts start",
     "build": "webpack -prod --colors",
     "build-dev": "webpack -dev --colors",
+    "build-dev2": "react-scripts build",
     "build-sass": "node-sass -w ./src/styles/scss/ -o ./src/styles/css/",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

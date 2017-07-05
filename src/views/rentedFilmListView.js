@@ -90,7 +90,7 @@ class RentedFilmListView extends Component {
         return (
             <div className="films-list-container">
                 <FilmListRender list={this.state.list} />
-                <div className="pagination-container">
+                <div className="page-pagination-container">
                     <div className="pag-left pag-element">Prev</div>
                     <div className="pag-right pag-element">Next</div>
                 </div>
