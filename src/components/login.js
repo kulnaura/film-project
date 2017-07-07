@@ -6,6 +6,24 @@ class Auth extends Component {
     constructor(props) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
+        this.state = {
+            status: false,
+            statusMessage: "",
+        }
+    }
+
+    setStatus(message) {
+        this.setState({
+            status: true,
+            statusMessage: message
+        });
+        setTimeout(() => {
+            // clear state
+            this.setState({
+                status: false,
+                statusMessage: ""
+            });
+        }, 5000);
     }
 
     onSubmit(e) {
@@ -14,6 +32,18 @@ class Auth extends Component {
         const formData = {};
         for (const field in this.refs) {
             formData[field] = this.refs[field].value;
+        }
+
+        if(formData.login == "") {
+            this.setStatus("login must be not empty");
+            document.getElementById("login").focus();
+            return false;
+        }
+
+        if(formData.password == "") {
+            this.setStatus("Password must be not empty");
+            document.getElementById("password").focus();
+            return false;
         }
 
         login(formData, this);
@@ -36,11 +66,11 @@ class Auth extends Component {
                             <ul className="base-list login-form-list">
                                 <li>
                                     <p className="element-caption">Login:</p>
-                                    <input className="form-input" ref="login" type="text" name="login" defaultValue="login01" placeholder="Enter your login" />
+                                    <input className="form-input" ref="login" type="text" name="login" id="login" placeholder="Enter your login" />
                                 </li>
                                 <li>
                                     <p className="element-caption">Password:</p>
-                                    <input className="form-input" ref="password" type="password" name="password" defaultValue="pass01" placeholder="Enter your password" />
+                                    <input className="form-input" ref="password" type="password" name="password" id="password" placeholder="Enter your password" />
                                 </li>
                                 <li>
                                     <button className="form-submit-button" type="submit">Login</button>
@@ -49,6 +79,14 @@ class Auth extends Component {
                         </form>
                     </div>
                 </div>
+                {(this.state.status)
+                    ? <div className="result">
+                    <div className="result-container">
+                        <p>{this.state.statusMessage}</p>
+                    </div>
+                </div>
+                    : null
+                }
             </div>
         )
     }
