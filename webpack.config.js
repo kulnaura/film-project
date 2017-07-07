@@ -54,6 +54,7 @@ module.exports = {
             PUBLIC_URL: ''
         }),
         new webpack.DefinePlugin({
+            // 'process.env.PUBLIC_URL': '/',
             'process.env.API_URL': env === 'dev' ? `"//localhost:8001/"` : `"//film-api-go.herokuapp.com/"`,
         }),
         new LiveReloadPlugin({appendScriptTag: true}),
