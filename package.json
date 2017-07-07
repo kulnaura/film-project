@@ -24,11 +24,10 @@
     "react-scripts": "1.0.7"
   },
   "scripts": {
-    "start": "npm run build; node dist/bundle.js",
+    "start": "npm run build",
     "start-dev2": "react-scripts start",
     "build": "webpack -p",
     "build:dev": "webpack-dev-server",
-    "build-dev": "webpack -dev --colors",
     "build-dev2": "react-scripts build",
     "build-sass": "node-sass -w ./src/styles/scss/ -o ./src/styles/css/",
     "test": "react-scripts test --env=jsdom",
