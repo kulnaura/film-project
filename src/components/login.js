@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Handlers from './handlers';
 import { login } from './../actions/authActions';
 import './../styles/css/login.css';
 

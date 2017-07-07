@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
-import { Handlers } from './handlers';
+import * as authActions from './../actions/authActions';
 import './../styles/css/registration.css';
-import { login } from './../actions/authActions';
-
 
 class Registration extends Component {
     constructor(props) {
@@ -20,31 +17,7 @@ class Registration extends Component {
         }
         formData.age = parseInt(formData.age);
 
-        let data = {
-            method: 'POST',
-            credentials: 'same-origin',
-            body: JSON.stringify(formData),
-            headers: {
-                'Accept':       'application/json',
-                'Content-Type': 'application/json'
-            }
-        };
-
-        return fetch(`https://film-api-go.herokuapp.com/auth`, data)
-            .catch( err => {
-                throw Error(err);
-            })
-            .then(response => Handlers.handleErrors(response.json()))
-            .then(json => {
-                if(json.success) {
-                    const loginData = {};
-                    loginData.login = formData.login;
-                    loginData.password = formData.password;
-
-                    login(loginData, this);
-                }
-
-            })
+        authActions.register(formData, this);
     }
 
     render() {

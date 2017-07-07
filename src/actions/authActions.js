@@ -4,6 +4,10 @@ import * as sessionActions from './sessionActions';
 
 export function AuthRequire(Component) {
     class AuthComponent extends Component {
+        constructor(props) {
+            super(props);
+        }
+
         componentWillMount() {
             this.checkAndRedirect();
         }
@@ -51,7 +55,7 @@ export function login(params, component) {
     let user = formData.login;
 
     // return fetch(process.env.API_URL, data)
-    return fetch(`https://film-api-go.herokuapp.com/login`, data)
+    return fetch(window.location.protocol + process.env.API_URL + `login`, data)
         .then(response => response.json())
         .then(response => Handlers.handleErrors(response))
         .then(json => {
@@ -65,5 +69,32 @@ export function login(params, component) {
         })
         .catch(err => {
             console.log(err)
+        })
+}
+
+export function register(formData, component) {
+    let data = {
+        method: 'POST',
+        credentials: 'same-origin',
+        body: JSON.stringify(formData),
+        headers: {
+            'Accept':       'application/json',
+            'Content-Type': 'application/json'
+        }
+    };
+
+    return fetch(window.location.protocol + process.env.API_URL + `auth`, data)
+        .catch( err => {
+            throw Error(err);
+        })
+        .then(response => Handlers.handleErrors(response.json()))
+        .then(json => {
+            if(json.success) {
+                const loginData = {};
+                loginData.login = formData.login;
+                loginData.password = formData.password;
+
+                this.login(loginData, component);
+            }
         })
 }

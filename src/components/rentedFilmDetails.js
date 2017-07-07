@@ -5,13 +5,15 @@ import * as FilmActions from './../actions/filmActions';
 import './../styles/css/filmDetails.css';
 
 class FilmList extends Component {
+    constructor(props) {
+        super(props);
+        this.filmDetails = {};
+        this.filmDetails.genres = [];
+    }
 
     componentWillMount() {
-        this.filmDetails = queryString.parse(this.props.location.search);
-        this.filmDetails.genres = JSON.parse(this.filmDetails.genres);
-        if(!this.filmDetails.genres) {
-            this.filmDetails.genres = [];
-        }
+        const getData = queryString.parse(this.props.location.search);
+        this.filmDetails = sessionActions.getFilm(getData.id);
     }
 
     unrentFilm = () => {
@@ -21,7 +23,6 @@ class FilmList extends Component {
             console.log("FILM HAVE NO ID")
         }
     }
-
 
     render() {
         return (

@@ -8,7 +8,7 @@ export class Handlers extends Component {
             } else if (response.message) {
                 throw Error(response.message);
             } else {
-                console.log(response);
+                // console.log(response);
             }
         }
         return response;

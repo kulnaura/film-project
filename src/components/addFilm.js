@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Handlers } from './handlers';
-import fetch from 'isomorphic-fetch';
-import * as sessionActions from './../actions/sessionActions';
+import * as filmActions from './../actions/filmActions';
+
 import './../styles/css/addFilm.css';
 
 class AddFilm extends Component {
@@ -69,31 +68,15 @@ class AddFilm extends Component {
         genres = uniqIntArray(genres);
         formData.genres = genres;
 
-        let data = {
-            method: 'POST',
-            credentials: 'same-origin',
-            body: JSON.stringify(formData),
-            headers: {
-                'Accept':       'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionActions.getToken(),
-            }
-        };
-
-
-        return fetch(`https://film-api-go.herokuapp.com/api/v1/film`, data)
-            .catch( err => {
-                throw Error(err);
-            })
-            .then(response => Handlers.handleErrors(response.json()))
-            .then(json => {
-                if (json.success) {
+        filmActions.addFilm(formData)
+            .then(result => {
+                if (result.success) {
                     for (const field in this.refs) {
                         this.refs[field].value = "";
                     }
                     this.setStatus("Film was added successfully");
                 }
-            })
+            });
     }
 
     render() {

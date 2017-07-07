@@ -1,20 +1,18 @@
 let path = require('path');
 let LiveReloadPlugin = require('webpack-livereload-plugin');
-let ExtractTextPlugin = require('extract-text-webpack-plugin');
-const prod = process.argv.indexOf('-prod') !== -1;
+const prod = process.argv.indexOf('-p') !== -1;
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+var InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 
 const config = {};
+var env;
 
 config.plugins = config.plugins||[];
 if (prod) {
-    config.plugins.push(new webpack.DefinePlugin({
-        'process.env.NODE_ENV': `"production"`
-    }));
+    env = "production";
 } else {
-    config.plugins.push(new webpack.DefinePlugin({
-        'process.env.NODE_ENV': `"dev"`
-    }));
+    env = "dev";
 }
 
 module.exports = {
@@ -23,7 +21,7 @@ module.exports = {
     output: {
         path: path.join(__dirname, 'dist'),
         filename: 'bundle.js',
-        publicPath: '/static/',
+        publicPath: '/',
     },
     context: __dirname,
     resolve: {
@@ -33,7 +31,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js?$/,
-                exclude: /(node_modules|bower_components)/,
+                exclude: /(node_modules|bower_components|dist|public|build)/,
                 loaders: 'babel-loader',
                 options: {
                     presets: ['react', 'es2015', 'stage-0']
@@ -52,13 +50,17 @@ module.exports = {
         ],
     },
     plugins: [
-        new webpack.DefinePlugin({
-            // ENV: process.ENV === 'dev' ? require('./dev-config-path')) : require('./prod-config-path')
-            'process.env.API_URL': process.env.NODE_ENV === 'dev' ? `"localhost:8001"` : `"https://film-api-go.herokuapp.com/"`,
-            'process.env.COSMIC_BUCKET': JSON.stringify(process.env.COSMIC_BUCKET),
-            'process.env.COSMIC_READ_KEY': JSON.stringify(process.env.COSMIC_READ_KEY),
-            'process.env.COSMIC_WRITE_KEY': JSON.stringify(process.env.COSMIC_WRITE_KEY)
+        new InterpolateHtmlPlugin({
+            PUBLIC_URL: ''
         }),
-        new LiveReloadPlugin({appendScriptTag: true})
+        new webpack.DefinePlugin({
+            'process.env.API_URL': env === 'dev' ? `"//localhost:8001/"` : `"//film-api-go.herokuapp.com/"`,
+        }),
+        new LiveReloadPlugin({appendScriptTag: true}),
+        new HtmlWebpackPlugin({
+            template: './public/index.html',
+            filename: 'index.html',
+            inject: 'body'
+        })
     ]
 };

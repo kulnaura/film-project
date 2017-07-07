@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Handlers } from './handlers';
-import fetch from 'isomorphic-fetch';
 import * as filmActions from './../actions/filmActions';
 import RentedFilmListView from './../views/rentedFilmListView';
 
@@ -25,7 +23,7 @@ class RentedFilmList extends Component {
 
     render() {
         return (
-            <RentedFilmListView list={this.state.list} urlParams={this.urlParams} />
+            <RentedFilmListView list={this.state.list} />
         )
     }
 }

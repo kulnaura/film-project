@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Handlers } from './handlers';
-import fetch from 'isomorphic-fetch';
 import * as filmActions from './../actions/filmActions';
 import FilmListView from './../views/filmListView';
 import './../styles/css/film.css';
@@ -14,7 +12,7 @@ class FilmList extends Component {
     }
 
     componentDidMount() {
-        filmActions.getFilmList(this.urlParams)
+        filmActions.getFilmList()
             .then(json => {
                 this.setState({
                     list: json.result,

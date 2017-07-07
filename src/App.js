@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
 import './styles/css/App.css';
 import './styles/css/base.css';
 
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Route,
+    Link
 } from 'react-router-dom';
 
 import Navbar from './components/navbar';

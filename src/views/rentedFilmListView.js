@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Handlers } from './../components/handlers';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Route,
+    Link
 } from 'react-router-dom';
 import * as filmActions from './../actions/filmActions';
+import * as sessionActions from './../actions/sessionActions';
 import './../styles/css/film.css';
 
 const FilmListRender = React.createClass({
@@ -22,17 +22,23 @@ const FilmListRender = React.createClass({
     }
 })
 
-const FilmListElement = React.createClass({
+class FilmListElement extends Component{
+    constructor(props) {
+        super(props);
+        this.saveFilmData = this.saveFilmData.bind(this);
+    }
+    saveFilmData(filmData) {
+        sessionActions.saveFilmData(filmData);
+        console.log("go to details")
+    }
     render() {
         let filmElement = this.props.value;
         return (
             <div className="film-element-container">
                 <div className="film-element-inner-container">
                     <p className="film-name">
-                        <Link to={ "/rented-film?id=" + filmElement.id +
-                                "&name=" + filmElement.name +
-                                "&year=" + filmElement.year +
-                                "&genres=" + JSON.stringify(filmElement.genres) }>{ filmElement.name }</Link>
+                        <Link to={ "/rented-film" + "?id=" + filmElement.id  }
+                              onClick={() => {this.saveFilmData(filmElement)}}>{ filmElement.name }</Link>
                     </p>
                     <p className="film-year">{ filmElement.year }</p>
                     { (filmElement.genres)
@@ -52,7 +58,7 @@ const FilmListElement = React.createClass({
             </div>
         )
     }
-})
+}
 
 
 class RentedFilmListView extends Component {
